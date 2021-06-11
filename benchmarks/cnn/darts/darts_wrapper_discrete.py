@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/liamli4465/darts/cnn')
+sys.path.append(r'C:\Users\miros\Documents\Oxford\thesis\liamcli_darts\darts\cnn')
 import genotypes
 from model_search import Network
 import utils
@@ -27,7 +27,7 @@ class AttrDict(dict):
 class DartsWrapper:
     def __init__(self, save_path, seed, batch_size, grad_clip, epochs, resume_iter=None, init_channels=16):
         args = {}
-        args['data'] = '/home/liamli4465/darts/data/'
+        args['data'] = r'C:\Users\miros\Documents\Oxford\thesis\liamcli_darts\darts\data'
         args['epochs'] = epochs
         args['learning_rate'] = 0.025
         args['batch_size'] = batch_size
@@ -62,7 +62,7 @@ class DartsWrapper:
 
 
         train_transform, valid_transform = utils._data_transforms_cifar10(args)
-        train_data = dset.CIFAR10(root=args.data, train=True, download=False, transform=train_transform)
+        train_data = dset.CIFAR10(root=args.data, train=True, download=True, transform=train_transform)
 
         num_train = len(train_data)
         indices = list(range(num_train))
@@ -150,7 +150,7 @@ class DartsWrapper:
       n = input.size(0)
 
       input = Variable(input, requires_grad=False).cuda()
-      target = Variable(target, requires_grad=False).cuda(async=True)
+      target = Variable(target, requires_grad=False).cuda()
 
       # get a random minibatch from the search queue with replacement
       self.optimizer.zero_grad()
@@ -202,7 +202,7 @@ class DartsWrapper:
           self.valid_iter = iter(self.valid_queue)
           input, target = next(self.valid_iter)
         input = Variable(input, volatile=True).cuda()
-        target = Variable(target, volatile=True).cuda(async=True)
+        target = Variable(target, volatile=True).cuda()
 
         logits = self.model(input, discrete=True)
         loss = self.criterion(logits, target)

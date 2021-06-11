@@ -1,5 +1,6 @@
 import sys
-sys.path.append('/home/liamli4465/nas_weight_share')
+# sys.path.append('/home/liamli4465/nas_weight_share')
+sys.path.append('.')
 import os
 import shutil
 import logging
